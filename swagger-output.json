@@ -1,0 +1,1226 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API REST to management orders of brewers",
+    "description": "Documentation about the diferent endpoints from API"
+  },
+  "host": "localhost:3000",
+  "basePath": "/v1/api",
+  "tags": [
+    {
+      "name": "API - SICER",
+      "description": "Endpoints"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "Bearer token",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Json Web Token"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "tags": [
+            "Authentication"
+        ],
+        "summary": "Create an user with role of admin",
+        "description": "",
+        "parameters": [
+            {
+                "name": "email",
+                "type": "string",
+                "in": "body",
+                "required": true
+            },
+            {
+                "name": "password",
+                "type": "string",
+                "in": "body",
+                "required": true
+            },
+            {
+                "name":"role",
+                "type": "string",
+                "in":"body",
+                "required":true
+            }
+        ],
+        "responses": {}
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "tags": [
+            "Authentication"
+        ],
+        "summary": "Sign in with credentials",
+        "description": "",
+        "parameters": [
+            {
+                "name": "email",
+                "type": "string",
+                "in": "body",
+                "required": true
+            },
+            {
+                "name": "password",
+                "type": "string",
+                "in": "body",
+                "required": true
+            }
+        ],
+        "responses": {}
+      }
+    },
+    "/user/": {
+      "get": {
+        "tags": [
+            "User"
+        ],
+        "summary": "Find all the users",
+        "description": "",
+        "parameters": [
+            {
+                "name": "pageNumber",
+                "type": "number",
+                "in": "query",
+                "required": false
+            },
+            {
+                "name": "pageSize",
+                "type": "number",
+                "in": "query",
+                "required": false
+            }
+        ],
+        "responses": {}
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": [
+            "User"
+        ],
+        "summary": "Find one user",
+        "description": "",
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              }
+        ],
+        "responses": {}
+      },
+      "patch": {
+        "tags": [
+            "User"
+        ],
+        "summary": "Update one user",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "tags": [
+            "User"
+        ],
+        "summary": "Delete one user on a logic way",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/customer/": {
+      "get": {
+        "tags": [
+            "Customer"
+        ],
+        "summary": "Find all the customers",
+        "description": "",
+        "parameters": [
+            {
+                "name": "pageNumber",
+                "type": "number",
+                "in": "query",
+                "required": false
+            },
+            {
+                "name": "pageSize",
+                "type": "number",
+                "in": "query",
+                "required": false
+            }
+        ],
+        "responses": {}
+      },
+      "post": {
+        "tags": [
+            "Customer"
+        ],
+        "summary": "Create an user with the role of customer",
+        "description": "",
+        "parameters": [
+            {
+                "name":"name",
+                "type":"string",
+                "in":"body",
+                "required":true
+            },
+            {
+                "name":"phone",
+                "type":"string",
+                "in":"body",
+                "required":true
+            },
+            {
+                "name": "user",
+                "type": "object",
+                "properties":{
+                    "email":{ "type": "string"},
+                    "password":{ "type": "string"}
+                },
+                "in": "body",
+                "required": true
+            },
+            {
+                "name":"address",
+                "type":"object",
+                "properties":{
+                    "province":{ "type": "string"},
+                    "city": { "type": "string"},
+                    "country":{ "type": "string"},
+                    "zip":{ "type": "string"},
+                    "street1": { "type": "string"},
+                    "street2": { "type": "string"}
+                },
+                "in":"body",
+                "required":true
+            }
+        ],
+        "responses": {}
+      }
+    },
+    "/customer/{id}": {
+      "get": {
+        "tags": [
+            "Customer"
+        ],
+        "summary": "Find one customer",
+        "description": "",
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              }
+        ],
+        "responses": {}
+      },
+      "patch": {
+        "tags": [
+            "Customer"
+        ],
+        "summary": "Update one customer",
+        "description": "",
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "tags": [
+            "Customer"
+        ],
+        "summary": "Inactivate one customer",
+        "description": "",
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              }
+        ],
+        "responses": {}
+      }
+    },
+    "/provider/": {
+        "get": {
+            "tags": [
+                "Provider"
+            ],
+            "summary": "Find all the providers",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "pageNumber",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                }
+            ],
+            "responses": {}
+          },
+          "post": {
+            "tags": [
+                "Provider"
+            ],
+            "summary": "Create an user with the role of provider",
+            "description": "",
+            "parameters": [
+                {
+                    "name":"name",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"phone",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name": "user",
+                    "type": "object",
+                    "properties":{
+                        "email":{ "type": "string"},
+                        "password":{ "type": "string"},
+                        "role":{"type":"string"}
+                    },
+                    "in": "body",
+                    "required": true
+                },
+                {
+                    "name":"address",
+                    "type":"object",
+                    "properties":{
+                        "province":{ "type": "string"},
+                        "city": { "type": "string"},
+                        "country":{ "type": "string"},
+                        "zip":{ "type": "string"},
+                        "street1": { "type": "string"},
+                        "street2": { "type": "string"}
+                    },
+                    "in":"body",
+                    "required":true
+                }
+            ],
+            "responses": {}
+          }
+    },
+    "/provider/{id}": {
+        "get": {
+            "tags": [
+                "Provider"
+            ],
+            "summary": "Find one provider",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          },
+          "patch": {
+            "tags": [
+                "Provider"
+            ],
+            "summary": "Update one provider",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          },
+          "delete": {
+            "tags": [
+                "Provider"
+            ],
+            "summary": "Inactivate one provider",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          }
+    },
+    "/seller/": {
+        "get": {
+            "tags": [
+                "Seller"
+            ],
+            "summary": "Find all the sellers",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "pageNumber",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                }
+            ],
+            "responses": {}
+          },
+          "post": {
+            "tags": [
+                "Seller"
+            ],
+            "summary": "Create an user with the role of seller",
+            "description": "",
+            "parameters": [
+                {
+                    "name":"name",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"phone",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name": "user",
+                    "type": "object",
+                    "properties":{
+                        "email":{ "type": "string"},
+                        "password":{ "type": "string"},
+                        "role":{"type":"string"}
+                    },
+                    "in": "body",
+                    "required": true
+                }
+            ],
+            "responses": {}
+          }
+    },
+    "/seller/{id}": {
+        "get": {
+            "tags": [
+                "Seller"
+            ],
+            "summary": "Find one seller",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          },
+          "patch": {
+            "tags": [
+                "Seller"
+            ],
+            "summary": "Update one seller",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          },
+          "delete": {
+            "tags": [
+                "Seller"
+            ],
+            "summary": "Inactivate one seller",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          }
+    },
+    "/form/": {
+        "get": {
+            "tags": [
+                "Form"
+            ],
+            "summary": "Find all the forms",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "pageNumber",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                }
+            ],
+            "responses": {}
+          },
+          "post": {
+            "tags": [
+                "Form"
+            ],
+            "summary": "Create a form",
+            "description": "",
+            "parameters": [
+                {
+                    "name":"name",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"phone",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"email",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"subject",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"type",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"message",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                }
+            ],
+            "responses": {}
+          }
+    },
+    "/form/{id}": {
+        "get": {
+            "tags": [
+                "Form"
+            ],
+            "summary": "Find one form",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          },
+          "patch": {
+            "tags": [
+                "Form"
+            ],
+            "summary": "Update one form",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          },
+          "delete": {
+            "tags": [
+                "Form"
+            ],
+            "summary": "Delete one form",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          }
+    },
+    "/product/": {
+        "get": {
+            "tags": [
+                "Product"
+            ],
+            "summary": "Find all the products",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "pageNumber",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                }
+            ],
+            "responses": {}
+          },
+          "post": {
+            "tags": [
+                "Product"
+            ],
+            "summary": "Create a product",
+            "description": "",
+            "parameters": [
+                {
+                    "name":"file",
+                    "type":"file",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"sku",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"description",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"price",
+                    "type":"double",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"image",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"stock",
+                    "type":"number",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"providerId",
+                    "type":"number",
+                    "in":"body",
+                    "required":true
+                }
+            ],
+            "responses": {}
+          }
+    },
+    "/product/provider/{id}": {
+        "get": {
+            "tags": [
+                "Product"
+            ],
+            "summary": "Find all the products by provider",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "pageNumber",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "id",
+                    "type": "number",
+                    "in": "param",
+                    "required": true
+                }
+            ],
+            "responses": {}
+          }
+    },
+    "/product/{id}": {
+        "get": {
+            "tags": [
+                "Product"
+            ],
+            "summary": "Find one product",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          },
+          "patch": {
+            "tags": [
+                "Product"
+            ],
+            "summary": "Update one product",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          },
+          "delete": {
+            "tags": [
+                "Product"
+            ],
+            "summary": "Inactivate one product",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          }
+    },
+    "/order/": {
+        "get": {
+            "tags": [
+                "Order"
+            ],
+            "summary": "Find all the orders",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "pageNumber",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                }
+            ],
+            "responses": {}
+          },
+          "post": {
+            "tags": [
+                "Order"
+            ],
+            "summary": "Create an order",
+            "description": "",
+            "parameters": [
+                {
+                    "name":"status",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"methodPayment",
+                    "type":"string",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"sellerId",
+                    "type":"number",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"customerId",
+                    "type":"number",
+                    "in":"body",
+                    "required":true
+                }
+            ],
+            "responses": {}
+          }
+    },
+    "/order/provider/{id}": {
+        "get": {
+            "tags": [
+                "Order"
+            ],
+            "summary": "Find all the orders by provider",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "pageNumber",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "id",
+                    "type": "number",
+                    "in": "param",
+                    "required": true
+                }
+            ],
+            "responses": {}
+          }
+    },
+    "/order/customer/{id}": {
+        "get": {
+            "tags": [
+                "Order"
+            ],
+            "summary": "Find all the orders by customer",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "pageNumber",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "id",
+                    "type": "number",
+                    "in": "param",
+                    "required": true
+                }
+            ],
+            "responses": {}
+          }
+    },
+    "/order/seller/{id}": {
+        "get": {
+            "tags": [
+                "Order"
+            ],
+            "summary": "Find all the orders by seller",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "pageNumber",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "id",
+                    "type": "number",
+                    "in": "param",
+                    "required": true
+                }
+            ],
+            "responses": {}
+          }
+    },
+    "/order/{id}": {
+        "get": {
+            "tags": [
+                "Order"
+            ],
+            "summary": "Find one order",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          },
+          "patch": {
+            "tags": [
+                "Order"
+            ],
+            "summary": "Update one order",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          },
+          "delete": {
+            "tags": [
+                "Order"
+            ],
+            "summary": "Delete one order",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          }
+    },
+    "/order/product": {
+        "post": {
+            "tags": [
+                "Items from order"
+            ],
+            "summary": "Add item into one order",
+            "description": "",
+            "parameters": [
+                {
+                    "name":"amount",
+                    "type":"number",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"orderId",
+                    "type":"number",
+                    "in":"body",
+                    "required":true
+                },
+                {
+                    "name":"productId",
+                    "type":"number",
+                    "in":"body",
+                    "required":true
+                }
+            ],
+            "responses": {}
+          },
+      "delete": {
+        "tags": [
+            "Items from order"
+        ],
+        "summary": "Delete item from order",
+        "description": "",
+        "parameters": [
+            {
+                "name":"orderId",
+                "type":"number",
+                "in":"body",
+                "required":true
+            },
+            {
+                "name":"productId",
+                "type":"number",
+                "in":"body",
+                "required":true
+            }
+        ],
+        "responses": {}
+      }
+    },
+    "/order/cancel/{id}": {
+        "patch": {
+            "tags": [
+                "Order"
+            ],
+            "summary": "Update status to cancelled from one order",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                  }
+            ],
+            "responses": {}
+          }
+    },
+    "/banner/": {
+        "get": {
+            "tags": [
+                "Banner"
+            ],
+            "summary": "Find all the images from banner",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "pageNumber",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "number",
+                    "in": "query",
+                    "required": false
+                }
+            ],
+            "responses": {}
+          },
+          "post": {
+            "tags": [
+                "Banner"
+            ],
+            "summary": "Save an image for banner",
+            "description": "",
+            "parameters": [
+                {
+                    "name":"file",
+                    "type":"file",
+                    "in":"body",
+                    "required":true
+                }
+            ],
+            "responses": {}
+          }
+    },
+    "/banner/{id}": {
+      "get": {
+        "tags": [
+            "Banner"
+        ],
+        "summary": "Find one image from banner",
+        "description": "",
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "tags": [
+            "Banner"
+        ],
+        "summary": "Delete one image from banner",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/statistic/product": {
+      "get": {
+        "tags": [
+            "Statistic"
+        ],
+        "summary": "Information about amount of sold product between 2 dates",
+        "description": "",
+        "parameters": [
+            {
+                "name": "startDate",
+                "type": "string",
+                "in": "query",
+                "required": true
+            },
+            {
+                "name": "endDate",
+                "type": "string",
+                "in": "query",
+                "required": true
+            },
+            {
+                "name": "seller",
+                "type": "number",
+                "in": "query",
+                "required": false
+            },
+            {
+                "name": "provider",
+                "type": "number",
+                "in": "query",
+                "required": false
+            },
+            {
+                "name": "customer",
+                "type": "number",
+                "in": "query",
+                "required": false
+            }
+        ],
+        "responses": {}
+      }
+    },
+    "/statistic/sales/{role}": {
+        "get": {
+            "tags": [
+                "Statistic"
+            ],
+            "summary": "Information about the sales by user between 2 dates",
+            "description": "",
+        "parameters": [
+          {
+            "name": "role",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "type": "string",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "type": "string",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/statistic/purchases": {
+        "get": {
+            "tags": [
+                "Statistic"
+            ],
+            "summary": "Information about the amount of purchases from customers between 2 dates",
+            "description": "",
+        "parameters": [
+          {
+            "name": "startDate",
+            "type": "string",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "type": "string",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    }
+  }
+}
