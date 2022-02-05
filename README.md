@@ -11,7 +11,7 @@ This is an api for management the orders from customers that want to buy beer, a
 To start you can clone this project:
 
 ```bash
-git clone https://gitlab.com/MarcoAntonioLopezFlores/sistema-cerveceros.git
+git clone https://github.com/MarcoAntonioLopezFlores/API-SICER-NODEJS.git
 ```
 
 First, create a `.env` file with your secrets:
@@ -45,7 +45,7 @@ You can verify if the services are running with the next command:
 docker-compose ps
 ```
 
-In addition, you can open pgadmin [http://localhost:5000](http://localhost:5000) to verify if the database exists
+In addition, you can open pgadmin [http://localhost:5050](http://localhost:5050) to verify if the database exists
 
 After that, run the development server:
 
